@@ -33,3 +33,10 @@ The invariants are defined by the characteristic polynomial
     det(lambda * I - A) = lambda**3 - I1 * lambda**2 + I2 * lambda - I3
 
 so `first_invariant` is exactly `trace`, `third_invariant` is exactly `determinant`, and `second_invariant` is the sum of the three principal 2x2 minors. Inputs are not copied or coerced, so passing a matrix of `float` values returns `float` results and small rounding errors are possible; compare floating results with a tolerance rather than equality.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
